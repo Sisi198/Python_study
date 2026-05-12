@@ -1,4 +1,4 @@
-<img width="1668" height="2154" alt="Python Basic-4" src="https://github.com/user-attachments/assets/12a1e686-7a90-4526-acfb-7848bfa9da44" /># Python_study
+# Python_study
 
 
 <img width="1668" height="2154" alt="Python Basic-2" src="https://github.com/user-attachments/assets/e8fd3a85-22ae-4363-aac9-eb0590a20ed2" />
