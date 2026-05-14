@@ -212,3 +212,88 @@ Note. Extra Tip (Modulo operator %) : Number of items left on the last page
 
 <img width="842" height="1236" alt="Screenshot 2026-05-14 at 3 03 38 pm" src="https://github.com/user-attachments/assets/9045d1a0-b051-40be-bf22-5301c884f0a0" />
 
+<img width="1356" height="672" alt="Screenshot 2026-05-14 at 3 33 49 pm" src="https://github.com/user-attachments/assets/9fb8fa23-8a5e-429d-9186-0cd1850d7f6f" />
+
+
+# String Operations
+
+* Strings: 
+
+1. A sequence of characters contained within 2 quotes: ex) "Michael Jackson"
+
+2. Also use a single quote: ex) 'Michael Jackson'
+
+3. Can be spaces or digits: ex) 123456
+
+4. Can be special characters: ex) ?><$%#@
+
+
+We can bind or assign a string to another variable. It is helpful to think of a string as an ordered sequence. 
+
+Each element in the sequence can be accessed using an index represented by an array of numbers.
+
+
+<img width="1042" height="904" alt="Screenshot 2026-05-14 at 3 38 08 pm" src="https://github.com/user-attachments/assets/89661e8f-a775-415b-b943-75bf2f53941d" />
+
+
+By using, to merge, repeat, or extract specific parts of text data. In psychology research, these are frequently utilised for tasks such as generating participant identification codes or setting data file paths.
+
+
+## 1. Main Types of Operations
+
+* Addition (+): Connects two strings together (e.g., combining a first name and last name).
+
+* Multiplication (*): Repeats a string a specified number of times (e.g., printing a divider line).
+
+* Indexing/Slicing: Extracts specific characters from a string.
+
+  
+## 2. Applications in Psychology Research
+
+
+* ID Generation: Creating unique IDs by combining participant initials and birth years.
+
+* Stimulus Presentation: Essential for combining text, such as "Hello, [Participant Name]. The test will now begin".
+
+* File Management: Useful for automatically generating filenames based on versions, like data_v1.csv or data_v2.csv.
+
+# Practice challenges (1): ID Generation & f-strings
+
+<img width="1206" height="524" alt="Screenshot 2026-05-14 at 4 00 53 pm" src="https://github.com/user-attachments/assets/af84dd46-a0c5-4822-bacf-a429d737ab21" />
+
+# Practice challenges (2): To read an Excel file, process data, and save it back
+
+1. $Import pandas as pd$ - Import the library for Excel processing
+   
+<img width="1006" height="286" alt="Screenshot 2026-05-14 at 11 21 58 pm" src="https://github.com/user-attachments/assets/e37fbc90-7ea8-4af3-a398-3c37e0129c41" />
+
+
+2. $Loading the Excel file with Python$ - In actual research, this single line brings Excel data into Python.
+
+<img width="812" height="42" alt="Screenshot 2026-05-14 at 11 22 48 pm" src="https://github.com/user-attachments/assets/a1637d23-a2f7-4f5a-9e9a-b2d954b8d33a" />
+
+3. Generating participant codes using string operations --- Create a new column in the format of 'name_age'.
+   $Within pandas, .astype(str) is used to convert numbers into strings$
+
+   <img width="1236" height="186" alt="Screenshot 2026-05-14 at 11 24 07 pm" src="https://github.com/user-attachments/assets/c61a3031-8201-4d93-b877-15dbfdb1cdee" />
+
+4. Exporting processed data back to Excel
+
+   <img width="1220" height="222" alt="Screenshot 2026-05-14 at 11 24 41 pm" src="https://github.com/user-attachments/assets/ca352bcb-f2b3-4680-b870-9e29cb3644f5" />
+
+   <img width="782" height="590" alt="Screenshot 2026-05-14 at 11 26 18 pm" src="https://github.com/user-attachments/assets/f583f832-9cdf-472f-9952-2e5e1a5b36e1" />
+
+
+# Key Explanations
+
+1. **pd.read_excel()**: This command "attaches" (loads) an Excel file into Python. It can bring in data for thousands of participants into a table format instantly.
+
+2. **df_study['name'] + "_" + ...**: This applies the String Operations (+) to the entire Excel dataset at once. There is no need to manually copy and paste formulas in Excel.
+
+3. **to_excel()**: This command converts the results worked on in Python back into an Excel file.
+
+
+
+# Slicing 
+
+* It is helpful to think of a string as a list or tuple: we can treat the string as a sequence and perform sequence operations. 
