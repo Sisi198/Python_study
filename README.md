@@ -263,17 +263,17 @@ By using, to merge, repeat, or extract specific parts of text data. In psycholog
 
 # Practice challenges (2): To read an Excel file, process data, and save it back
 
-1. $Import pandas as pd$ - Import the library for Excel processing
+1. Import pandas as pd: Import the library for Excel processing
    
 <img width="1006" height="286" alt="Screenshot 2026-05-14 at 11 21 58 pm" src="https://github.com/user-attachments/assets/e37fbc90-7ea8-4af3-a398-3c37e0129c41" />
 
 
-2. $Loading the Excel file with Python$ - In actual research, this single line brings Excel data into Python.
+2. Loading the Excel file with Python: In actual research, this single line brings Excel data into Python.
 
 <img width="812" height="42" alt="Screenshot 2026-05-14 at 11 22 48 pm" src="https://github.com/user-attachments/assets/a1637d23-a2f7-4f5a-9e9a-b2d954b8d33a" />
 
-3. Generating participant codes using string operations --- Create a new column in the format of 'name_age'.
-   $Within pandas, .astype(str) is used to convert numbers into strings$
+3. Generating participant codes using string operations: To create a new column in the format of 'name_age'.
+   Within pandas, .astype(str) is used to convert numbers into strings
 
    <img width="1236" height="186" alt="Screenshot 2026-05-14 at 11 24 07 pm" src="https://github.com/user-attachments/assets/c61a3031-8201-4d93-b877-15dbfdb1cdee" />
 
