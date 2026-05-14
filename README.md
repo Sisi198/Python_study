@@ -144,38 +144,71 @@ Current State: The red-highlighted area before the letter 'p' in the middle of t
 
 # Expression
 
-<img width="1668" height="2154" alt="Python Basic-6" src="https://github.com/user-attachments/assets/3d45f274-217f-4d0a-a71e-2bf0355d05f4" />
+: Describe a type of operation the computer performs.
 
-<img width="1668" height="2154" alt="Python Basic-7" src="https://github.com/user-attachments/assets/7e2c6149-a352-42ae-8b85-298c5ead968b" />
+## Mathematical Operation
+
+1. Numbers: operands
+2. Math symbols: operators
+
+<img width="1436" height="560" alt="Screenshot 2026-05-14 at 2 34 50 pm" src="https://github.com/user-attachments/assets/e30ed68b-db16-4ab4-8546-145acbe1b91f" />
+
+Note. Basic arithmetic operations like adding multiple numbers
+
+<img width="204" height="286" alt="Screenshot 2026-05-14 at 2 36 07 pm" src="https://github.com/user-attachments/assets/aa3d836e-6487-4148-bc12-c1ea966b0417" />
+
+<img width="1546" height="472" alt="Screenshot 2026-05-14 at 2 36 21 pm" src="https://github.com/user-attachments/assets/295bef47-9346-4147-8ca1-567e1831ef98" />
+
+## Curiosity 1. Why are the results different? (Types of Division)
+
+* Python clearly distinguishes between two ways of performing division:
+
+1. / (Normal Division): Division we learned in math class. Even if a number divides perfectly, Python provides the exact value, including decimal places, resulting in a float. For example, while $25 / 5$ divides evenly, Python outputs it as 5.0.
+
+2. // (Floor Division): This discards everything after the decimal point and leaves only the "integer part," or the quotient. This is why in your image, $25 // 6$ results in 4 rather than 4.166....
+
+## Curiosity 2. Does it always work this way?
+
+* Mostly yes, but there are a few extra rules: 
+
+1. The / operator always returns a float, regardless of the numbers being divided.
+
+2. The // operator generally tries to return an int. However, if even one of the numbers involved is a float (e.g., $25 // 6.0$), the result will be a float like 4.0 (though the decimal part is still discarded).
 
 
-<img width="1668" height="2154" alt="Python Basic-8" src="https://github.com/user-attachments/assets/4bbc370a-a84e-48fb-ac56-f795313e0539" />
+## Examples in Psychology Research
+
+: In psychology research, these operators are used differently when organising data or assigning participants: 
+
+1. Normal Division (/): Used when calculating average scores for questionnaire items (e.g., an average depression scale score of $3.42$).
+
+2. Floor Division (//): Useful for assigning participants equally into groups or calculating the total number of pages needed by dividing the total number of items by the number of items shown per page.
+
+# Practise Challenge:
+
+<img width="1076" height="530" alt="Screenshot 2026-05-14 at 2 58 18 pm" src="https://github.com/user-attachments/assets/5f8e4009-a3b2-4a14-9ee4-0fe52a591ec8" />
 
 
-<img width="1668" height="2154" alt="Python Basic-9" src="https://github.com/user-attachments/assets/abd1cf52-b0f8-47ce-a252-808bf76c411f" />
+Note. Extra Tip (Modulo operator %) : Number of items left on the last page
 
 
-<img width="1668" height="2154" alt="Python Basic-10" src="https://github.com/user-attachments/assets/fcdc899a-7b49-45f5-a76b-3ae484ad5c18" />
+### Note. use / when the "exact value" is important, and use // when "how many groups/chunks" is what matters! Let me know if you have any other questions.
 
+# Variables
 
-<img width="1668" height="2154" alt="Python Basic-11" src="https://github.com/user-attachments/assets/2da08886-3e8d-44aa-9969-f5be48e8bb3c" />
+* We can use the variables to store the values
 
+* In this case, we assign a value of 1 to the variable "my_varaible" using the assignment operator, i.e. the equal sign
 
-<img width="1668" height="2154" alt="Python Basic-16" src="https://github.com/user-attachments/assets/792518c3-7031-4b7a-b2a8-66aa616f43ab" />
+  <img width="1098" height="428" alt="Screenshot 2026-05-14 at 3 02 01 pm" src="https://github.com/user-attachments/assets/0c4ed824-bbd3-4b76-b5cd-9b163767fdf4" />
 
-<img width="1668" height="2154" alt="Python Basic-15" src="https://github.com/user-attachments/assets/60bcf4d0-6b66-46a1-b2db-4c79196c17b0" />
+* We can then use the value somewhere else in the code by typing the exact name of the variable
 
-<img width="1668" height="2154" alt="Python Basic-14" src="https://github.com/user-attachments/assets/1ebee93f-8751-4d3f-9a17-51e6dda203ac" />
+* We will use the clown to denote the value of the variable
 
-<img width="1668" height="2154" alt="Python Basic-13" src="https://github.com/user-attachments/assets/50aadc33-e1e2-4a0a-ae84-8699267ba45a" />
+  <img width="1388" height="610" alt="Screenshot 2026-05-14 at 3 02 42 pm" src="https://github.com/user-attachments/assets/f42c7c9c-aa07-4edb-9af4-6c0dcb472e32" />
 
-<img width="1668" height="2154" alt="Python Basic-12" src="https://github.com/user-attachments/assets/73548598-3310-4ea6-8a47-9ce19c64f9ee" />
+# Example: 
 
-<img width="1668" height="2154" alt="Python Basic-19" src="https://github.com/user-attachments/assets/0c69655d-1b62-482a-9d78-dbbd8aa7dcd9" />
-<img width="1668" height="2154" alt="Python Basic-18" src="https://github.com/user-attachments/assets/cef5d4f2-8614-4051-859e-1fa30f164628" />
-
-<img width="1668" height="2154" alt="Python Basic-17" src="https://github.com/user-attachments/assets/ce78a4af-e182-4b3d-b5ea-f49b95508e8f" />
-
-<img width="1668" height="2154" alt="Python Basic-20" src="https://github.com/user-attachments/assets/7db7aa74-a856-4b84-a03c-0fbfa4dd1ce8" />
-
+<img width="842" height="1236" alt="Screenshot 2026-05-14 at 3 03 38 pm" src="https://github.com/user-attachments/assets/9045d1a0-b051-40be-bf22-5301c884f0a0" />
 
