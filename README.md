@@ -293,7 +293,210 @@ By using, to merge, repeat, or extract specific parts of text data. In psycholog
 3. **to_excel()**: This command converts the results worked on in Python back into an Excel file.
 
 
+#  Stimulus Presentation; practise challenges
+
+## Simulated psychology experiment workflow
+
+### 1. Participant Info (Usually loaded from Excel, but set as variables here for practice)
+
+<img width="1198" height="60" alt="Screenshot 2026-05-19 at 2 17 00 pm" src="https://github.com/user-attachments/assets/ef117b70-a558-4bff-a54a-a2feb4e9554b" />
+
+### 2. First Stimulus: Greeting & Instructions (Using String Operations)
+
+### f-strings let us seamlessly insert variables directly into a sentence.
+
+<img width="1214" height="170" alt="Screenshot 2026-05-19 at 2 17 44 pm" src="https://github.com/user-attachments/assets/f0e0f702-24ab-47b3-b875-06c09853f755" />
+
+### 3. Second Stimulus: Presenting the question and capturing a response
+
+<img width="1180" height="118" alt="Screenshot 2026-05-19 at 2 18 40 pm" src="https://github.com/user-attachments/assets/51e12892-ccd6-4dc7-8539-efa00563216c" />
+
+### input() is a function that halts the script and waits for keyboard input from the user.
+
+<img width="1228" height="366" alt="Screenshot 2026-05-19 at 2 19 33 pm" src="https://github.com/user-attachments/assets/b8f3b833-9257-47d2-a786-78182eeb722a" />
+
+
+## * Error: The Mechanism Behind the Error
+    
+    * When response = input("Enter your choice (1-5): ") runs, Python pauses and waits for keyboard input.
+    
+    * If you press Enter without typing anything, the response variable captures an empty string: "".
+    
+    * In the very next line, you executed int(response), which translates to int("")—a command telling Python to "convert an empty text into an integer."
+    
+    * Since Python cannot translate absolute emptiness or blank space into a number, it raises a ValueError, essentially stating: "This is not a valid piece of text to turn into a base-10 integer."
+
+### 4. Response Verification & Data Categorisation
+
+### User input always enters Python as a 'string'. We must convert it to an int to use math/logic.
+
+<img width="1192" height="184" alt="Screenshot 2026-05-19 at 2 20 38 pm" src="https://github.com/user-attachments/assets/167d2ec3-e504-411d-b472-38b3dfe7ccdd" />
+
+### 5. Result Summary (This data can later be exported to Excel)
+
+<img width="1194" height="212" alt="Screenshot 2026-05-19 at 2 21 09 pm" src="https://github.com/user-attachments/assets/272745e1-0800-4208-8b68-a1a0e1ea5484" />
+
 
 # Slicing 
 
-* It is helpful to think of a string as a list or tuple: we can treat the string as a sequence and perform sequence operations. 
+* It is helpful to think of a string as a list or tuple: we can treat the string as a sequence and perform sequence operations.
+
+<img width="1418" height="594" alt="Screenshot 2026-05-19 at 1 54 59 pm" src="https://github.com/user-attachments/assets/59431976-4c06-43ee-8519-76b84cf08e40" />
+
+# Stride
+
+* We can also input a stride value as follows:
+
+    * The two indicate, we'd select every second variable
+ 
+<img width="1466" height="566" alt="Screenshot 2026-05-19 at 1 56 25 pm" src="https://github.com/user-attachments/assets/9527f970-b9a9-4302-a062-f36d549948df" />
+
+<img width="1570" height="696" alt="Screenshot 2026-05-19 at 2 45 06 pm" src="https://github.com/user-attachments/assets/ad4c1e74-1adc-4bc1-a660-c2babdd491e1" />
+
+
+## Applications in Psychology Research
+
+* Extracting Sub-identifiers (Slicing): If a participant ID follows a strict notation like 2026SisiA, you can use slicing to isolate the 4-digit year, the name, or the group condition letter separately.
+
+* Split-Half Reliability (Stride): When psychometrically validating a questionnaire, researchers often calculate split-half reliability by separating odd-numbered items from even-numbered items to correlate them. A stride of 2 allows you to split these items in a single line of code.
+
+## Example 1: Extracting info from a participant code (Slicing)
+
+<img width="1202" height="32" alt="Screenshot 2026-05-19 at 2 40 41 pm" src="https://github.com/user-attachments/assets/9c667ee5-e6ae-4f25-8eb2-c39a6d7f9662" />
+
+
+### Slice the first 4 characters (indices 0, 1, 2, 3)
+
+<img width="1216" height="82" alt="Screenshot 2026-05-19 at 2 41 06 pm" src="https://github.com/user-attachments/assets/79beac1b-5085-4a9f-a3fb-f139ee838a84" />
+
+
+### Slice from index 4 up to (but excluding) index 8
+
+<img width="1216" height="84" alt="Screenshot 2026-05-19 at 2 41 35 pm" src="https://github.com/user-attachments/assets/a3743420-cab8-47f5-aab7-c0afa3d03709" />
+
+
+## Example 2: Splitting odd/even items for reliability checks (Stride)
+
+### A participant's response scores for items 1 through 8
+
+<img width="1216" height="32" alt="Screenshot 2026-05-19 at 2 42 19 pm" src="https://github.com/user-attachments/assets/bb789b82-860d-4fd8-af68-d6249f56a991" />
+
+### [start at 0 :: step by 2] -> Extracts indices 0, 2, 4, 6 (Items 1, 3, 5, 7)
+
+<img width="1202" height="30" alt="Screenshot 2026-05-19 at 2 42 56 pm" src="https://github.com/user-attachments/assets/7005feed-5863-4ce5-82e7-d7653c1f6038" />
+
+### [start at 1 :: step by 2] -> Extracts indices 1, 3, 5, 7 (Items 2, 4, 6, 8)
+
+<img width="1198" height="38" alt="Screenshot 2026-05-19 at 2 43 22 pm" src="https://github.com/user-attachments/assets/0b6607d6-ad5b-492c-9810-e7a49a84afa2" />
+
+### Results:
+<img width="1198" height="272" alt="Screenshot 2026-05-19 at 2 43 40 pm" src="https://github.com/user-attachments/assets/f0452301-90d6-4967-b16e-3e998c97963c" />
+
+
+# Tuples: Slicing
+
+* Use the len command to obtain the length of the string. - As there are 15 elements, the result is 15
+
+  <img width="976" height="308" alt="Screenshot 2026-05-19 at 2 47 23 pm" src="https://github.com/user-attachments/assets/39f8fdae-3c70-4ae4-9cfa-cb890175bd18" />
+
+## What exactly is a Tuple?
+
+* A tuple is an "unalterable data bundle whose contents can never be changed."
+
+  * Syntax: Unlike a List, which uses square brackets [ ], a Tuple is created using parentheses ( ). (e.g., my_tuple = (1, 2, 3))
+ 
+  * Core Characteristic (Immutability): Once constructed, elements cannot be added, removed, or modified.
+
+### Why use Tuples in psychology research?
+
+* Tuples are used to safely lock away critical reference values or parameters that must never fluctuate during an experiment.
+
+    * Fixed stimulus presentation intervals: (0.5, 1.0, 1.5, 2.0)
+    
+    * The baseline monitor resolution settings: (1920, 1080)
+    
+    * Fixed group criteria or demographic categories: ("Male", "Female")
+
+* Even if you make a mistake in your script and accidentally try to alter these values, Python will instantly raise an error and halt the program, shielding your experimental design from accidental corruption.
+
+## When do we use Tuple Slicing?
+
+* Using Tuple Slicing when you want to safely copy out a specific segment of data from a fixed tuple:
+
+    * Scenario: Extracting only the first 3 presentation times out of a 10-stimulus calibration sequence.
+    
+    * Scenario: Isolating a specific Region of Interest (ROI) from a fixed array of EEG channel names.
+ 
+## Practise challenges; Tuple Slicing :
+
+### 1. Defining fixed experimental stimulus intervals (seconds) as a Tuple
+
+<img width="1202" height="36" alt="Screenshot 2026-05-19 at 2 59 35 pm" src="https://github.com/user-attachments/assets/4ee882cf-9e86-475a-b868-985eaa031727" />
+
+### 2. Tuple Slicing (Extracting indices 1 up to, but excluding, 4)
+
+### The raw data is left untouched; the snippet is copied into a 'new tuple'.
+
+<img width="1192" height="184" alt="Screenshot 2026-05-19 at 3 00 10 pm" src="https://github.com/user-attachments/assets/bdce1909-ddc4-4364-b4fc-d0b000690135" />
+
+### 3. Testing the absolute rule of Tuples (Error Test)
+
+<img width="1230" height="838" alt="Screenshot 2026-05-19 at 3 00 47 pm" src="https://github.com/user-attachments/assets/d79922e6-04e2-46e3-936c-c495571b5542" />
+
+
+
+### Curiosity: What if I would like to change the settings of the stimulus in the experiments?
+
+
+### A: In situations like that, instead of modifying the tuple itself, you should either directly update the numbers in your Python script file or redesign your data container into a List configuration depending on your experimental needs.
+
+### 1. Modifying the Experimental Design Itself (Script Editing)
+
+* If you initially designed the stimulus presentation intervals to be (0.5, 1.0, 1.5) but decided to increase them to (1.0, 2.0, 3.0) after a research meeting, you simply open your Python file and rewrite the hard-coded values:
+
+    Before: stimulus_intervals = (0.5, 1.0, 1.5)
+    
+    After: stimulus_intervals = (1.0, 2.0, 3.0)
+
+* Modifying and saving the script file itself is completely fine. What a tuple strictly prevents is the running program from accidentally altering its own memory values mid-experiment.
+
+
+
+### 2. When Values Must Dynamically Change Mid-Experiment (Using Lists)
+
+* If you are designing an Adaptive Task—where stimulus presentation times must scale up or down in real-time based on the participant's performance or reaction speed—you should use a highly mutable List ([ ]) right from the start rather than a tuple.
+
+### Practise challenges
+
+### Scenario A: Fixed Baseline Configuration (Tuple)
+
+### This display resolution standard must never drift during the task session.
+
+<img width="1206" height="34" alt="Screenshot 2026-05-19 at 3 08 04 pm" src="https://github.com/user-attachments/assets/5b9d82fb-f15f-4008-afea-822d9d54f697" />
+
+### Scenario B: Dynamic Real-time Adjustments (List)
+
+### If the participant answers correctly, we shorten the intervals to increase difficulty.
+
+<img width="1212" height="82" alt="Screenshot 2026-05-19 at 3 08 48 pm" src="https://github.com/user-attachments/assets/58a004f2-65d0-4bc0-881f-4af24c21d906" />
+
+### Shorten the first stimulus interval to 1.5 seconds in real-time (Lists are mutable)
+
+<img width="1210" height="112" alt="Screenshot 2026-05-19 at 3 09 23 pm" src="https://github.com/user-attachments/assets/c13dccb7-398f-4cb4-9e4c-d85bf01fec57" />
+
+
+## Strings: concatenating
+
+* concatenating or combining strings: we use the addition symbols. The result is a new string that is a combination of both.
+
+<img width="1134" height="544" alt="Screenshot 2026-05-19 at 2 48 51 pm" src="https://github.com/user-attachments/assets/c63bcf6d-acfd-43b4-8d59-b16610f86b6d" />
+
+* We can multiply the strings by the number of times we would like to replicate them.
+
+<img width="1472" height="494" alt="Screenshot 2026-05-19 at 2 49 55 pm" src="https://github.com/user-attachments/assets/790777bf-cde1-4906-95c6-dc162a74557d" />
+
+
+## Strings: Immutable
+
+<img width="1614" height="586" alt="Screenshot 2026-05-19 at 2 50 41 pm" src="https://github.com/user-attachments/assets/df845fdf-ee11-42f7-8a6c-4d80f2d7f578" />
+
