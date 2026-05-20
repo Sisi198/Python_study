@@ -1,4 +1,4 @@
-<img width="1210" height="178" alt="Screenshot 2026-05-20 at 4 21 35 pm" src="https://github.com/user-attachments/assets/63385baf-212a-4bfa-9335-c2d98bf135bd" /># Python_study
+# Python Study
 
 # Data Types
 
