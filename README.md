@@ -1,4 +1,4 @@
-# Python_study
+<img width="1210" height="178" alt="Screenshot 2026-05-20 at 4 21 35 pm" src="https://github.com/user-attachments/assets/63385baf-212a-4bfa-9335-c2d98bf135bd" /># Python_study
 
 # Data Types
 
@@ -485,18 +485,97 @@ By using, to merge, repeat, or extract specific parts of text data. In psycholog
 <img width="1210" height="112" alt="Screenshot 2026-05-19 at 3 09 23 pm" src="https://github.com/user-attachments/assets/c13dccb7-398f-4cb4-9e4c-d85bf01fec57" />
 
 
+
+
 ## Strings: concatenating
 
-* concatenating or combining strings: we use the addition symbols. The result is a new string that is a combination of both.
+## * concatenating or combining strings: we use the addition symbols. The result is a new string that is a combination of both.
 
 <img width="1134" height="544" alt="Screenshot 2026-05-19 at 2 48 51 pm" src="https://github.com/user-attachments/assets/c63bcf6d-acfd-43b4-8d59-b16610f86b6d" />
 
-* We can multiply the strings by the number of times we would like to replicate them.
+## 1. How it Works?
+* In mathematics, $1 + 1$ equals $2$. In string operations, however, "1" + "1" places the two characters side-by-side, resulting in "11".
+
+<img width="1210" height="178" alt="Screenshot 2026-05-20 at 4 21 35 pm" src="https://github.com/user-attachments/assets/e456f425-4b74-4df2-88dd-88da97d7cf62" />
+
+$\rightarrow$ if you need space between the text, you simply add " " for the spacing.
+
+## 2. Applications in Psychology Research
+
+* Building Dynamic Stimulus Phrases: Essential when you need to present personalised text to a participant on the screen.
+
+    * "Hello, " + participant_name + ". The test will now begin."
+
+### * Automating File Paths and Filenames (Highly Important):
+
+* When automating data storage, you dynamically chain the 'folder directory', 'participant ID', and 'file extension' together to generate a valid target path.
+  
+    * "data/raw_data/" + "subject_01" + ".csv" $\rightarrow$ "data/raw_data/subject_01.csv"
+
+### Practical challenge:
+
+#### 1. Defining research variables
+
+<img width="1202" height="170" alt="Screenshot 2026-05-20 at 4 29 32 pm" src="https://github.com/user-attachments/assets/4e535398-1bd0-4607-8db3-a768e26ab0bb" />
+
+#### 2. Merging text using Concatenation (+) to build a clean storage path
+#### Target: experiment_results/SUB_104_baseline.xlsx
+
+<img width="1194" height="182" alt="Screenshot 2026-05-20 at 4 39 43 pm" src="https://github.com/user-attachments/assets/a6d58de3-2cba-4868-b20e-50deae5b87a6" />
+
+#### 3. Critical Warning: Strings and numbers cannot be directly concatenated!
+
+#### WRONG: greeting = "Participant Age: " + age (Triggers a TypeError)
+#### CORRECT: Wrap the number in str() to transform it into text before merging.
+
+<img width="1212" height="246" alt="Screenshot 2026-05-20 at 4 40 33 pm" src="https://github.com/user-attachments/assets/2124cfc4-7c36-453b-a659-5ac180ccf806" />
+
+
+
+## * We can also multiply the strings by the number of times we would like to replicate them.
 
 <img width="1472" height="494" alt="Screenshot 2026-05-19 at 2 49 55 pm" src="https://github.com/user-attachments/assets/790777bf-cde1-4906-95c6-dc162a74557d" />
+
+### 1. Practical Research Applications
+
+* Automating Interface Layouts (Most Common): During text-based clinical surveys or task instructions, separating blocks of information visually keeps participants focused. Instead of manually typing dashes or equal signs, you can multiply a single character to scale the layout dynamically.
+  
+* "-" * 50 $\rightarrow$ --------------------------------------------------
+
+* Generating Uniform Distractor Arrays: In cognitive paradigms like Visual Search Tasks, you frequently need to present a target embedded within a specific number of uniform distractor stimuli. String multiplication lets you instantly scale the density of the background noise.
+
+* "X" * 7 $\rightarrow$ XXXXXXX (A uniform array of 7 distractor items)
+
+* Dynamic Padding and Indentation: When formatting raw metrics or session updates into log files, you can multiply blank space characters (" ") to programmatically align text blocks without disturbing data alignment.
+
+### Practical challenge:
+
+#### 1. Visual Search Task Stimulus Array Generation
+#### Scenario: The target stimulus is 'O' and the background distractors are 'X'
+
+<img width="1208" height="56" alt="Screenshot 2026-05-20 at 4 54 02 pm" src="https://github.com/user-attachments/assets/52a29d34-fcfe-4e81-9c2b-18611cb29357" />
+
+#### Chain 7 distractors, 1 target, and 3 trailing distractors sequentially
+
+<img width="1196" height="132" alt="Screenshot 2026-05-20 at 4 54 29 pm" src="https://github.com/user-attachments/assets/637886af-74ce-4e62-b4c5-b92eb26e326f" />
+
+#### 2. Automated Boundaries for Survey Prompts
+
+<img width="1192" height="236" alt="Screenshot 2026-05-20 at 4 54 56 pm" src="https://github.com/user-attachments/assets/09dba393-1227-4523-a48d-8964ee45b8e1" />
+
+
+#### 3. Inline Scaling via f-strings
+#### You can evaluate string operations directly inside format fields.
+
+<img width="1224" height="212" alt="Screenshot 2026-05-20 at 4 55 26 pm" src="https://github.com/user-attachments/assets/0111a43f-4b26-4e39-98f3-d5d1bbfe4cee" />
 
 
 ## Strings: Immutable
 
 <img width="1614" height="586" alt="Screenshot 2026-05-19 at 2 50 41 pm" src="https://github.com/user-attachments/assets/df845fdf-ee11-42f7-8a6c-4d80f2d7f578" />
 
+* String Immutability means that once a string is created in Python, its internal contents can never be directly modified or altered (Just like Tuple)
+
+* Data Integrity (Preventing Corruption): Immutability acts as a strict firewall. It ensures that critical identifiers like a subject's name or a unique track code ("SUB_101") cannot be subtly altered mid-experiment due to background script bugs. The core data remains clean.
+
+* Encouraging Clean Pipelines: Because strings cannot change implicitly, it forces a healthy coding habit: whenever you slice, strip, or adjust raw text data, you must explicitly assign the output to a new variable, preserving the absolute source tracking.
