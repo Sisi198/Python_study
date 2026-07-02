@@ -83,49 +83,50 @@ Boolean is a data type that can only have one of two values: True or False. You 
 
 
 ## In Python, Booleans have the following characteristics:
-
-### 1. Only Two Values Exist
-
- * True: Represents "Yes" or "Correct." (Note: In Python, the first letter must be capitalised!)
-
- * False: Represents "No" or "Incorrect."
-
-### 2. When are they used?
-Booleans are primarily generated as results when you compare values or check conditions. Unlike converting numbers, this belongs to the realm of logic.
-
-### Example 1 (Comparison):
-
-If you input 10 > 5, Python answers True.
-
-If you ask 3 == 4 (Is 3 equal to 4?), it answers False.
-
-### Example 2 (Conditional Statements):
-
-Booleans play a critical role when building logic like: "If (if) the user is logged in (True), show the My Page."
-
-#### 1. the Boolean (True/False) acts as a "Pass/Fail notice."
-
-is_logged_in = True  # Assuming the user is logged in (Boolean)
-
-if is_logged_in:
-    print("Accessing My Page...")
-else:
-    print("Login required.")
-
-#### 2. How it works
-Condition Check: Python checks whether the value immediately following the if is True or False.
-
-The Fork in the Road:
-
-If the value is True: The code directly under the if is executed.
-
-If the value is False: The code under the else (meaning "otherwise") is executed.
-
-#### 3. Real-life Analogies
-
-Sensor Light: "Is motion detected?" → If True, turn on the light; if False, keep it off.
-
-Vending Machine: "Is the inserted amount greater than the drink price?" → If True, dispense the drink; if False, display "Insufficient funds."
+    
+    1. Only Two Values Exist
+    
+         * True: Represents "Yes" or "Correct." (Note: In Python, the first letter must be capitalised!)
+        
+         * False: Represents "No" or "Incorrect."
+        
+    2. When are they used?
+        
+        Booleans are primarily generated as results when you compare values or check conditions. Unlike converting numbers, this belongs to the realm of logic.
+    
+    Example 1 (Comparison):
+    
+        If you input 10 > 5, Python answers True.
+        
+        If you ask 3 == 4 (Is 3 equal to 4?), it answers False.
+    
+    Example 2 (Conditional Statements):
+    
+        Booleans play a critical role when building logic like: "If (if) the user is logged in (True), show the My Page."
+        
+        1. the Boolean (True/False) acts as a "Pass/Fail notice."
+    
+            is_logged_in = True  # Assuming the user is logged in (Boolean)
+            
+            if is_logged_in:
+                print("Accessing My Page...")
+            else:
+                print("Login required.")
+    
+          2. How it works
+            Condition Check: Python checks whether the value immediately following the if is True or False.
+            
+            The Fork in the Road:
+    
+                If the value is True: The code directly under the if is executed.
+                
+                If the value is False: The code under the else (meaning "otherwise") is executed.
+    
+            3. Real-life Analogies
+    
+                Sensor Light: "Is motion detected?" → If True, turn on the light; if False, keep it off.
+                
+                Vending Machine: "Is the inserted amount greater than the drink price?" → If True, dispense the drink; if False, display "Insufficient funds."
 
 # Practical challenge
 
@@ -579,3 +580,5 @@ $\rightarrow$ if you need space between the text, you simply add " " for the spa
 * Data Integrity (Preventing Corruption): Immutability acts as a strict firewall. It ensures that critical identifiers like a subject's name or a unique track code ("SUB_101") cannot be subtly altered mid-experiment due to background script bugs. The core data remains clean.
 
 * Encouraging Clean Pipelines: Because strings cannot change implicitly, it forces a healthy coding habit: whenever you slice, strip, or adjust raw text data, you must explicitly assign the output to a new variable, preserving the absolute source tracking.
+
+
