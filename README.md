@@ -582,3 +582,109 @@ $\rightarrow$ if you need space between the text, you simply add " " for the spa
 * Encouraging Clean Pipelines: Because strings cannot change implicitly, it forces a healthy coding habit: whenever you slice, strip, or adjust raw text data, you must explicitly assign the output to a new variable, preserving the absolute source tracking.
 
 
+# PsychoPy 
+
+## 1. Loops (For/while)
+
+   : This concept is used when you need to execute the exact same operation multiple times. In an experimental setting, instructing the computer to "repeat the trial 20 times" is the perfect real-world example of this principle.
+
+* Why this concept is vital in coding experiments:
+
+    Without loops, if you wanted to run 20 trials, you would have to copy and paste the code for a single trial 20 times in a row. Loops allow you to wrap the trial logic into a clean, compact block and tell Python: "Run this specific block exactly 20 times," keeping your experimental script efficient and drastically reducing the chances of human copy-paste errors.
+
+Code EX: 
+
+for trial in range(5):
+    print(f"Running trial {trial + 1}")
+
+<img width="1232" height="248" alt="Screenshot 2026-07-03 at 6 10 35 pm" src="https://github.com/user-attachments/assets/4ee03d89-600d-40a7-b930-8b29fb1f905a" />
+
+
+
+## Practice challenge: 
+        
+        Scenario: You are running 8 trials of an experiment.
+        For each trial, print a message like:
+        "Trial 1 of 8: presenting stimulus..."
+        
+        Bonus: Only print "Halfway there!" once, when you reach trial 4.
+
+<img width="1234" height="600" alt="Screenshot 2026-07-03 at 6 10 41 pm" src="https://github.com/user-attachments/assets/5049089f-c293-4df2-8ccf-049ebf565bda" />
+
+<img width="1226" height="404" alt="Screenshot 2026-07-03 at 6 12 23 pm" src="https://github.com/user-attachments/assets/bdb22f11-1a67-4208-91c0-148206808a8c" />
+
+### Q. The f in print() statements (Loops): 
+
+The f prefix is strictly required only when you want to embed a variable (something whose value changes dynamically) inside a string. 
+
+The f acts as an explicit instruction telling Python: "Scan this string, and if you find a section wrapped in curly braces { }, evaluate the variable or code inside it and inject its value directly into that exact spot." If a string does not contain any curly braces { }, adding an f or leaving it out produces the exact same output. 
+
+
+
+## 2. Lists [ ]
+
+    : Unlike tuples, lists allow you to freely modify, add, or delete values after they are created. This property makes them ideal for handling data that needs to be shuffled or dynamically updated during an experiment, such as stimulus lists or randomised condition parameters.
+
+    * Why this concept is vital in coding experiments:
+    
+    In psychological and cognitive behavioural paradigms, keeping your trial presentations randomised is crucial to avoid order effects. Because lists are mutable, you can load all your experimental stimuli into a single list and use built-in functions like random.shuffle() to instantly mix up the presentation order for every new participant, ensuring a clean and unbiased data collection process.
+
+Code EX: 
+
+conditions = ["congruent", "incongruent", "neutral"]
+
+<img width="1220" height="62" alt="Screenshot 2026-07-03 at 6 12 37 pm" src="https://github.com/user-attachments/assets/d4f7db30-93e5-40d6-9619-108601fd0baa" />
+
+
+
+## Practice challenge: 
+
+    Scenario: You have 4 stimulus conditions: "red", "blue", "green", "yellow".
+        1. Store them in a list.
+        2. Use random.shuffle() to randomise their order.
+        3. Loop through the shuffled list and print each condition with its trial number.
+        
+        Bonus: Add a 5th condition to the list after shuffling, using .append().
+
+<img width="1196" height="490" alt="Screenshot 2026-07-03 at 6 12 51 pm" src="https://github.com/user-attachments/assets/5f97b4f5-4ec1-4663-bacd-072f4730b08f" />
+
+* The enumerate() Function : The enumerate() function goes through a list and extracts both the index (order number) and the actual value at the same time. In this code, because the index variable 'i' starts automatically at 0, we add 1 (i + 1) to naturally generate the human-readable trial number (starting from 1).
+
+
+## 3. Dictionaries { }
+
+    : A dictionary stores multiple pieces of information about a single trial or participant by binding them together in a "Label (Key) : Value" format. This data structure is incredibly widely used for structured experimental data management.
+
+    Code EX: 
+
+        trial_info = {
+            "condition": "congruent",
+            "correct_key": "f",
+            "stimulus": "RED"
+            }
+        print(trial_info["condition"])
+
+<img width="1554" height="242" alt="Screenshot 2026-07-03 at 6 30 55 pm" src="https://github.com/user-attachments/assets/7be30fd4-dfe1-4175-b716-327627d79b6c" />
+
+
+
+
+## Practice challenge: 
+
+        Scenario: Create a dictionary for one participant with these keys:
+        - participant_id
+        - age
+        - group ("control" or "experimental")
+        
+        Then print a sentence using f-string that combines all three values,
+        like: "Participant 104 (age 24) is in the experimental group."
+        
+        Bonus: Create a list of 3 such dictionaries (3 participants),
+        and loop through them, printing each one's summary sentence.
+
+
+<img width="1548" height="370" alt="Screenshot 2026-07-03 at 6 36 06 pm" src="https://github.com/user-attachments/assets/7f3918c5-653f-4584-992e-ae18c0e34b75" />
+
+
+
+
