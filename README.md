@@ -584,6 +584,7 @@ $\rightarrow$ if you need space between the text, you simply add " " for the spa
 
 # PsychoPy 
 
+
 ## 1. Loops (For/while)
 
    : This concept is used when you need to execute the exact same operation multiple times. In an experimental setting, instructing the computer to "repeat the trial 20 times" is the perfect real-world example of this principle.
@@ -685,6 +686,30 @@ conditions = ["congruent", "incongruent", "neutral"]
 
 <img width="1548" height="370" alt="Screenshot 2026-07-03 at 6 36 06 pm" src="https://github.com/user-attachments/assets/7f3918c5-653f-4584-992e-ae18c0e34b75" />
 
+## 4. Conditionals (if / elif / else)
+
+    : when you need to programmatically determine whether a participant's response is correct, or when you need to dynamically display different stimuli based on specific experimental conditions.
+
+    Code EX: 
+
+        if response == correct_key:
+        accuracy = "correct"
+        else:
+        accuracy = "incorrect"
+
+<img width="1198" height="256" alt="Screenshot 2026-07-05 at 3 12 40 pm" src="https://github.com/user-attachments/assets/d865b6fc-2c29-4654-b5dc-475072e83b0b" />
+
+
+
+## Practice challenge: 
+
+        Scenario: A participant's response time (rt) was recorded in seconds.
+        Write code that checks the rt value and prints:
+        - "Too fast (possible error)" if rt < 0.15
+        - "Normal response" if 0.15 <= rt <= 2.0
+        - "Timeout" if rt > 2.0
+        
+        Test it with rt = 0.1, rt = 0.8, and rt = 3.5
 
 
 
