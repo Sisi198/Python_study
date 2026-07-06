@@ -212,3 +212,63 @@ Key point: the + inside the quotes is just a literal character being printed, no
 
 
 # Operators
+
+# Arithmetic Operators
+
+   * `+`  **Addition**
+   * `-`  **Subtraction**
+   * `*`  **Multiplication**
+   * `/`  **Division** (Always returns a float/decimal result)
+   * `//` **Floor Division** (Discards the decimal part, returns the quotient only)
+   * `%`  **Modulo** (Returns the remainder only)
+
+
+Code EX: 
+
+n_correct = 15
+n_total = 20
+
+accuracy = n_correct / n_total
+print(accuracy)     # 0.75
+
+## Scenario: Calculating the mean of 3 reaction times (in seconds).
+
+      rt1 = 0.45
+      rt2 = 0.52
+      rt3 = 0.61
+      
+      1. Add the three values together and store the result inside a variable named total_rt.
+      
+      2. Divide total_rt by 3 and store the result inside a variable named mean_rt.
+      
+      3. Output the result using an f-string in the following format: "Mean RT: 0.527s" (rounded to 3 decimal places).
+
+
+### How f-string Float Formatting Works
+
+   1. f"{mean_rt}" $\rightarrow$ "0.5266666666666667" (No formatting applied; prints the raw, original value)
+   2. f"{mean_rt:.3f}" $\rightarrow$ "0.527" (Rounds to 3 decimal places)
+   3. f"{mean_rt:.1f}" $\rightarrow$ "0.5" (Rounds to 1 decimal place)
+   4. f"{mean_rt:.0f}" $\rightarrow$ "1" (Rounds to 0 decimal places, behaving like an integer)
+
+* The colon (:) acts as a separator indicating that formatting rules follow.
+
+* The period (.) signals that you are specifying the precision for the fractional (decimal) part.
+
+* Breaking it down: .3 means "how many decimal places", f means "format as a float". You'll use this constantly when presenting experiment results — nobody reports accuracy as 0.5266666666666667
+
+Q. Is storing it in a message variable mandatory? 
+
+* You can feed an f-string directly into a print() function, and it will execute identically:
+
+  #### Approach A: Store in a variable first, then print
+      message = f"Mean RT: {mean_rt:.3f}"
+      print(message)
+   
+  #### Approach B: Print directly (Skip creating the intermediate variable)
+      print(f"Mean RT: {mean_rt:.3f}")
+
+
+Creating an intermediate variable like message only earns its keep when you intend to re-use that exact string elsewhere in your script—for instance, if you need to print the text to the terminal window and write it to an external .txt log file simultaneously. 
+
+If your objective is simply to display it once and move on, printing it directly via print(f"...") is much more concise.
