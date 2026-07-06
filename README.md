@@ -1,4 +1,4 @@
-<img width="1194" height="134" alt="Screenshot 2026-07-06 at 6 11 29 pm" src="https://github.com/user-attachments/assets/575d2837-3a56-47fa-8e01-bf3b49f40d70" /># Variable :  "A labeled box that holds a value"
+# Variable :  "A labeled box that holds a value"
 
 A variable is a labeled box that holds a value. If you measure a participant's reaction time of 0.452 seconds and want to use it later, you need to store it somewhere. You do it like this:
 
