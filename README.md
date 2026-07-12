@@ -272,3 +272,201 @@ Q. Is storing it in a message variable mandatory?
 Creating an intermediate variable like message only earns its keep when you intend to re-use that exact string elsewhere in your script—for instance, if you need to print the text to the terminal window and write it to an external .txt log file simultaneously. 
 
 If your objective is simply to display it once and move on, printing it directly via print(f"...") is much more concise.
+
+
+## Scenario. The experiment consists of a total of 45 trials, and I plan to provide a short break every 10 trials.
+
+      1. Check the result of dividing n_trials by 10 (/). → How many "complete sets of 10" will we get?
+      
+      2. Check the result of floor dividing (//) n_trials by 10. → What is the difference between the two?
+      
+      3. Check the result of the modulo operation (%) on n_trials by 10 (the remainder). → What does this signify?
+
+
+<img width="1230" height="322" alt="Screenshot 2026-07-12 at 1 32 15 pm" src="https://github.com/user-attachments/assets/25e143aa-b6ff-4b3f-b5b4-9b32b9e88e35" />
+
+
+/ → 4.5
+
+This is the value that accurately calculates "how many sets of 10 there are," down to the decimal. It means there are 4 sets, with the remaining half (0.5 sets) left over.
+
+// → 4
+
+It calculates only the quotient as a whole integer. It is used when you want to say, "Discard the remainder; I only want to know the number of completely filled sets." // is commonly called integer division or floor division.
+
+% → 5
+
+It represents "5 actual leftover trials" based on the raw trial count. In other words, if you divide 45 trials by 10, you fill 4 sets (40 trials), and 5 trials are left over, unable to make a full set. (The 5 isn't "0.5 of a trial" — it's 5 actual leftover trials: 4 full sets of 10 = 40 trials, and 5 trials remain uncounted.)
+
+### Why this is useful in experiment code
+
+Code EX: 
+
+current_trial = 20
+
+if current_trial % 10 == 0:
+    print("Take a break!")
+
+* If the remainder when dividing current_trial by 10 is 0 (meaning the 10th, 20th, 30th... trial), the break message appears exactly at that moment.
+
+# Comparison Operators
+
+   == : equal
+   
+   != : Not equal
+   
+   < : smaller than 
+   
+   > : Bigger than
+   
+   <= : smaller than or equal to
+   
+   >= : bigger than or equal to
+
+Always returns in True/False
+
+
+## Scenario: Check whether the participant's response time exceeded the timeout limit (1.5 seconds) and whether they answered correctly.
+
+      rt = 1.72
+      timeout_limit = 1.5
+      correct_answer = "space"
+      participant_response = "space"
+
+1. Compare whether `rt` is greater than (exceeded) `timeout_limit`, store the result in the `is_timeout` box, and `print()` it.
+2. Compare whether `participant_response` is equal to `correct_answer`, store the result in the `is_correct` box, and `print()` it.
+3. Predict whether each of the two results will be `True` or `False` first, and then run the code to verify if your prediction is correct.
+
+<img width="1108" height="466" alt="Screenshot 2026-07-12 at 1 54 17 pm" src="https://github.com/user-attachments/assets/3421d254-dc2c-429d-ab1d-2dfc58c98f98" />
+
+<img width="1108" height="466" alt="Screenshot 2026-07-12 at 1 54 17 pm" src="https://github.com/user-attachments/assets/ccfc579d-0222-4900-9bef-1e10059cf959" />
+
+   1. variable name
+
+      : Since this value stores whether a timeout occurred rather than correctness, a name like is_timeout would be more appropriate. Because the name is_correct was reused twice, the first is_correct was actually overwritten by the second line (remember the "overwriting values inside a box" concept from last time?). Consequently, the value storing the timeout status is not preserved in this code.
+
+   2. The comparison itself differs from the request
+      
+      : The request asked whether rt was greater than (exceeded) timeout_limit, but the code uses the equality operator (==).
+
+            timeout_limit == rt     # "Is 1.5 equal to 1.72?" → False (because they are not equal)
+            rt > timeout_limit       # "Is 1.72 greater than 1.5?" → This is what needs to be asked
+         While 1.72 == 1.5 is naturally False, this does not mean "a timeout did not occur"; it simply means "the two numbers are different." 
+         In reality, since rt = 1.72 is greater than timeout_limit = 1.5, a timeout has indeed occurred. The current code does not reflect this fact.
+
+<img width="1210" height="550" alt="Screenshot 2026-07-12 at 2 05 36 pm" src="https://github.com/user-attachments/assets/45c9fc14-8449-44d9-9629-9fee24ae4b5e" />
+
+# Conditional Statements (if / elif / else)
+
+Conditional statements allow us to create "actions that change based on conditions" using the True/False values we have built so far, such as is_correct and is_timeout.
+
+* Basic Structure
+
+  if condition:
+
+  Code to execute when the condition is True
+
+* Code EX:
+
+        rt = 1.72
+      timeout_limit = 1.5
+      
+      if rt > timeout_limit:
+          print("Timeout! Trial skipped.")
+
+: Since rt > timeout_limit is True, the print(...) line is executed, and "Timeout! Trial skipped." is printed. If rt had been 1.2, the condition would be False, and the print inside would be completely skipped without running.
+
+if rt > timeout_limit:      # 1) A colon (:) is mandatory at the end of the condition
+    print("Timeout!")        # 2) The next line must be indented (usually 4 spaces)
+
+* else — When the Condition is False
+
+        rt = 1.2
+      timeout_limit = 1.5
+      
+      if rt > timeout_limit:
+          print("Timeout! Trial skipped.")
+      else:
+          print("Response recorded in time.")
+
+: Since rt is 1.2, the condition evaluates to False. The if block is skipped, and the else block executes, printing "Response recorded in time.". Either if or else will run—never both.
+
+* elif — When There Are Multiple Conditions
+
+  This is used when you need three or more branches of logic, like "If A, do this; else if B, do that; otherwise, do this":
+
+        accuracy = 0.55
+      
+      if accuracy >= 0.9:
+          print("Excellent performance")
+      elif accuracy >= 0.7:
+          print("Good performance")
+      else:
+          print("Needs improvement")
+
+:  Since accuracy = 0.55: the first condition (>= 0.9) → False, the second condition (>= 0.7) → also False, so it ultimately drops down to the else block and prints "Needs improvement". Python checks conditions sequentially from top to bottom, stops exactly where it encounters the first True, and skips the rest.
+
+### Scenario: Provide different feedback depending on whether the participant's response is correct or incorrect.
+
+   correct_answer = "space"
+   participant_response = "enter"
+
+   1. If participant_response is equal to correct_answer, print "Correct!".
+   
+   2. If they are not equal, print "Incorrect.".
+   (Use if / else to handle both cases)
+   
+   3. Predict which result will appear first, then run the code to verify.
+
+
+<img width="1192" height="188" alt="Screenshot 2026-07-12 at 3 22 56 pm" src="https://github.com/user-attachments/assets/8306e7d2-3c4d-4b8f-887a-848c0e403df5" />
+
+
+### Scenario: Provide a three-stage feedback based on the participant's accuracy.
+
+      accuracy = 0.78
+      
+      1. If accuracy is 0.9 or higher, print "Excellent performance".
+      
+      2. Otherwise, if it is 0.7 or higher, print "Good performance".
+      
+      3. If neither condition is met, print "Needs improvement".
+      
+      (Use all three: if / elif / else)
+
+<img width="1186" height="486" alt="Screenshot 2026-07-12 at 3 22 03 pm" src="https://github.com/user-attachments/assets/11eec6c3-9019-4733-ba49-1e8eaacd77d3" />
+
+# Combining Multiple Conditions: and, or
+
+In experiment code, situations often arise where "this condition AND that condition must both be met." For example, a trial might only be counted as a "success" if the participant answered correctly and responded within the time limit.
+
+      and: Both conditions must be True for the whole expression to be True.
+      
+      or: The whole expression is True if at least one of the conditions is True.
+
+   is_correct = True
+   is_timeout = False
+   
+   if is_correct and not is_timeout:
+       print("Success: correct and in time")
+   else:
+       print("Failed: either wrong or too slow")
+   
+is_correct is True. is_timeout is False, but adding not flips it, making not is_timeout evaluate to True. Ultimately, it becomes True and True, so the overall condition is True, and the "Success" message is printed.
+
+### Scenario: Print "Valid trial: correct and fast" only if the participant answered correctly and their response time was within 1.5 seconds. Otherwise, print "Invalid trial".
+
+      is_correct = True
+      rt = 1.8
+      timeout_limit = 1.5
+
+      Compare whether rt is less than timeout_limit, and store the result in the is_in_time box.
+
+      Combine is_correct and is_in_time using and to create your condition.
+      
+      If the condition is True, print "Valid trial: correct and fast". If it is False, print "Invalid trial".
+
+
+<img width="1208" height="426" alt="Screenshot 2026-07-12 at 3 39 38 pm" src="https://github.com/user-attachments/assets/28c6d1ef-669d-4cf6-a35e-2ad381e9e833" />
+
+
