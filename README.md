@@ -466,7 +466,7 @@ is_correct is True. is_timeout is False, but adding not flips it, making not is_
       
       If the condition is True, print "Valid trial: correct and fast". If it is False, print "Invalid trial".
 
+![Uploading Screenshot 2026-07-12 at 3.41.23 pm.png…]()
 
-<img width="1208" height="426" alt="Screenshot 2026-07-12 at 3 39 38 pm" src="https://github.com/user-attachments/assets/28c6d1ef-669d-4cf6-a35e-2ad381e9e833" />
 
 
