@@ -285,9 +285,53 @@ Common types of references:
 
 # ICA
 
+
+{
 raw_short = raw.copy().crop(tmax=min(3000, raw.times[-1]))
 ica = ICA(n_components=63, method='picard', random_state=42, verbose=False)
 ica.fit(raw_short, verbose=False)
+}
+
+  1. raw_short = raw.copy().crop(tmax=min(3000, raw.times[-1]))
+
+    * raw.copy() → Copies the original data (leaves the original intact)
+
+    * .crop(tmax=...) → Crops the data up to a specific time point
+
+    * min(3000, raw.times[-1]) → Selects the smaller value between 3000 seconds and the total duration of the data. This acts as a safety measure in case a subject's dataset is shorter than 3000 seconds.
+
+  2. ica = ICA(n_components=63, method='picard', random_state=42, verbose=False)
+
+    * ICA() → Creates an ICA object (configures settings; does not execute yet)
+
+    * n_components=63 → Decomposes into 63 components (because rank becomes 63 following average referencing)
+    
+    * method='picard' → Uses the Picard algorithm (faster than runica)
+    
+    * random_state=42 → Fixes the random seed so that identical results are reproduced every time
+
+      → ICA internally utilises random numbers during calculation. Because it involves randomness, results could vary slightly every time it is executed.
+
+      * Setting random_state=42:
+
+        Guarantees the exact same result every time you run it.
+        
+        The number 42 has no special mathematical meaning; it is simply a commonly used convention. 
+            
+    * verbose=False → Suppresses output
+
+3. ica.fit(raw_short, verbose=False)
+
+    * ica.fit() → Starts the actual ICA fitting/training!
+    
+    * raw_short → Fits using the 3000-second cropped dataset
+  
+## Code For ICA in Actual Research Settings (Sufficient RAM)
+
+{
+ica = ICA(n_components=63, method='picard', random_state=42)
+ica.fit(raw) 
+}
 
 
-     
+
