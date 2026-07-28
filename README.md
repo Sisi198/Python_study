@@ -1,6 +1,10 @@
 # EEG data Python code study
 
-{!pip install mne python-picard -q}
+{
+
+!pip install mne python-picard -q
+
+}
 
   1. ! → Attached to the front when running terminal commands in Colab (indicates it is a system command, not Python code)
 
@@ -12,10 +16,17 @@
   
   5. -q → "quiet" mode, which outputs a concise installation process
 
-{import mne
+{
+
+import mne
+
 import numpy as np
+
 import pandas as pd
-from mne.preprocessing import ICA}
+
+from mne.preprocessing import ICA
+
+}
 
   1. import → "Import this library and make it ready to use"
 
@@ -37,9 +48,13 @@ from mne.preprocessing import ICA}
 
 ## Data download
 
-{!aws s3 sync --no-sign-request \
+{
+
+!aws s3 sync --no-sign-request \
   s3://openneuro.org/ds006648/sub-001 \
-  /content/ds006648/sub-001}
+  /content/ds006648/sub-001
+  
+  }
 
 
     1. aws s3 sync → Synchronise (download) files from an AWS S3 bucket
@@ -61,19 +76,26 @@ from mne.preprocessing import ICA}
         →   --no-sign-request is omitted
 
        * How to use aws configure
-          : aws configure is an interactive setup. Instead of typing everything into a single line of code, running it will prompt questions one by one for you to answer:
+          : aws configure is an interactive setup. Instead of typing everything into a single line of code, running it will prompt 
 
                 $ aws configure
+                
                   AWS Access Key ID: AKIAIOSFODNN7EXAMPLE        ← Type here
+                  
                   AWS Secret Access Key: wJalrXUtnFEMI/K7MDENG  ← Type here
+                  
                   Default region name: us-east-1                 ← Type here
+                  
                   Default output format: json                    ← Type here
 
           * Method to input all at once via code
 
             import os
+            
               os.environ['AWS_ACCESS_KEY_ID'] = 'your_key'
+              
               os.environ['AWS_SECRET_ACCESS_KEY'] = 'your_secret'
+              
               os.environ['AWS_DEFAULT_REGION'] = 'us-east-1'
 
               # Then run sync
@@ -97,10 +119,12 @@ from mne.preprocessing import ICA}
 
 
 {
+
 raw = mne.io.read_raw_eeglab(
     '/content/ds006648/sub-001/eeg/sub-001_task-readpoetry_eeg.set',
     preload=False
 )
+
 }
 
     1. mne.io → MNE's file reading module
@@ -122,8 +146,11 @@ raw = mne.io.read_raw_eeglab(
 # remove EXG channel
 
 {
+
 exg_channels = [ch for ch in ['EXG1','EXG2','EXG3','EXG4','EXG5','EXG6','EXG7','EXG8'] if ch in raw.ch_names]
+
 raw.drop_channels(exg_channels)
+
 }
 
     
@@ -143,8 +170,11 @@ raw.drop_channels(exg_channels)
 # Setting the Montage
 
 {
+
 montage = mne.channels.make_standard_montage('biosemi64')
+
 raw.set_montage(montage, on_missing='warn')
+
 }
 
     1. montage = mne.channels.make_standard_montage('biosemi64')
@@ -187,8 +217,12 @@ raw.set_montage(montage, on_missing='warn')
 # Loading Data into Memory + Filtering
 
 {
+
 raw.load_data()
+
 raw.filter(l_freq=1.0, h_freq=40.0, verbose=False)
+
+
 }
 
   1. raw.load_data()
@@ -222,7 +256,9 @@ raw.filter(l_freq=1.0, h_freq=40.0, verbose=False)
 # Re-referencing
 
 {
+
 raw.set_eeg_reference('average', projection=False, verbose=False)
+
 }
 
   1. raw.set_eeg_reference() : Re-configure the reference electrode for the EEG data
@@ -287,9 +323,13 @@ Common types of references:
 
 
 {
+
 raw_short = raw.copy().crop(tmax=min(3000, raw.times[-1]))
+
 ica = ICA(n_components=63, method='picard', random_state=42, verbose=False)
+
 ica.fit(raw_short, verbose=False)
+
 }
 
   1. raw_short = raw.copy().crop(tmax=min(3000, raw.times[-1]))
@@ -329,9 +369,150 @@ ica.fit(raw_short, verbose=False)
 ## Code For ICA in Actual Research Settings (Sufficient RAM)
 
 {
+
 ica = ICA(n_components=63, method='picard', random_state=42)
+
 ica.fit(raw) 
+
 }
 
 
 
+# Automatic Artifact Classification and Removal via ICLabel
+
+{ 
+
+from mne_icalabel import label_components
+
+ic_labels = label_components(raw_short, ica, method='iclabel')
+
+labels = ic_labels['labels']
+
+proba = ic_labels['y_pred_proba']
+
+exclude = [i for i, label in enumerate(labels)
+           if label not in ['brain', 'other']
+           and proba[i].max() > 0.9]
+
+ica.exclude = exclude
+
+ica.apply(raw)
+
+}
+
+  1. from mne_icalabel import label_components
+
+      * mne_icalabel → Dedicated library for ICLabel (requires separate installation alongside MNE)
+      * label_components → Function that classifies what each ICA component represents
+
+
+  2. ic_labels = label_components(raw_short, ica, method='iclabel')
+
+      * raw_short → The 3,000-second cropped dataset used earlier (must match the data on which ICA was fitted)       
+      * ica → The fitted ICA object
+      * method='iclabel' → Classify components using the ICLabel model
+    
+  3. labels = ic_labels['labels']
+  4. proba = ic_labels['y_pred_proba']
+
+    * labels → List of component classification labels (e.g., ['eye blink', 'brain', 'muscle artifact', ...])
+    * proba → Probability values for each label (e.g., 99% probability for eye blink, 1% for brain)
+
+  5. exclude = [i for i, label in enumerate(labels)
+           if label not in ['brain', 'other']
+           and proba[i].max() > 0.9]
+
+    * enumerate(labels) → Returns pairs of indices and labels (e.g., (0, 'eye blink'), (1, 'brain'))
+    * label not in ['brain', 'other'] → Retains only non-brain, non-other artifacts (eye blink, muscle, channel noise, etc.)
+    * proba[i].max() > 0.9 → Ensures only components with classification probability over 90% are flagged for removal
+
+
+  6. ica.exclude = exclude
+  7. ica.apply(raw)
+
+    * ica.exclude = exclude → Flags the selected indices as targets for removal
+    * ica.apply(raw) → Applies the ICA component subtraction across the entire dataset (the full 6,422-second dataset, not just the 3,000-second subset)
+
+
+# epoching 
+
+{
+
+events, event_id = mne.events_from_annotations(raw)
+
+epochs = mne.Epochs(
+    raw,
+    events,
+    event_id={'stimulus': 2},
+    tmin=-4.0,
+    tmax=11.0,
+    baseline=(-4.0, 0),
+    preload=True,
+    verbose=False
+)
+
+}
+
+  1. events, event_id = mne.events_from_annotations(raw)
+
+     * mne.events_from_annotations() → Extracts event annotations embedded within the raw data
+     * events → Event array containing timestamps and event codes
+     * event_id → Dictionary mapping original annotation descriptions to internal MNE integer IDs (e.g., {'65282': 2, '65281': 1, ...})
+
+  2. epochs = mne.Epochs(
+    raw,                       : Raw continuous data
+    events,                    : Extracted event matrix
+    event_id={'stimulus': 2},  : Selects MNE ID 2 (originally '65282')
+    tmin=-4.0,                 : Segment start time: 4.0 seconds prior to stimulus onset
+    tmax=11.0,                 : Segment end time: 11.0 seconds after stimulus onset
+    baseline=(-4.0, 0),        : Baseline correction interval
+    preload=True,              : Load segmented epochs into memory immediately
+    verbose=False              : Suppress execution logs
+)
+
+      * event_id={'stimulus': 2}
+        * Maps MNE ID 2 (the internal integer code for annotation '65282') to the human-readable label 'stimulus'.
+
+      * baseline=(-4.0, 0)
+        * Subtracts the mean amplitude calculated across the -4.0 s to 0 s pre-stimulus interval from the entire trial segment. Zero-centring the pre-stimulus signal isolates post-stimulus evoked dynamics.
+      * preload=True
+        * Unlike raw continuous recordings, segmented epoch arrays (e.g., 212 trials * 15 seconds) have a substantially lower memory footprint and can safely be loaded directly into RAM.
+       
+
+
+
+
+
+
+
+
+
+# Typical Preprocessing Pipeline in Research
+
+## Research-grade Preprocessing Pipeline
+
+raw = mne.io.read_raw_eeglab('sub-001.set', preload=True) _→ Load full data directly_
+
+raw.drop_channels(exg_channels)
+
+raw.set_montage(montage)
+
+raw.filter(l_freq=1.0, h_freq=40.0)
+
+raw.set_eeg_reference('average', projection=False)
+
+## ICA on full data
+
+ica = ICA(n_components=63, method='picard', random_state=42)
+
+ica.fit(raw) _→ Directly on full data!_
+
+## ICLabel & Artifact removal
+
+ic_labels = label_components(raw, ica, method='iclabel')
+
+ica.apply(raw)
+
+## Epoching
+
+epochs = mne.Epochs(raw, events, tmin=-4.0, tmax=11.0, baseline=(-4.0, 0))
