@@ -478,14 +478,7 @@ epochs = mne.Epochs(
       * preload=True
         * Unlike raw continuous recordings, segmented epoch arrays (e.g., 212 trials * 15 seconds) have a substantially lower memory footprint and can safely be loaded directly into RAM.
        
-
-
-
-
-
-
-
-
+____
 
 # Typical Preprocessing Pipeline in Research
 
@@ -516,3 +509,64 @@ ica.apply(raw)
 ## Epoching
 
 epochs = mne.Epochs(raw, events, tmin=-4.0, tmax=11.0, baseline=(-4.0, 0))
+
+_____
+
+# Condition Separation + ERP Visualisation
+
+{
+
+mapping = pd.read_excel('EEGLAB_Epoch_to_PoemType.xlsx')
+
+mapping = mapping.dropna(subset=['PoemType'])
+
+
+haiku_idx = mapping[mapping['PoemType'] == 'H']['EEGLAB_Epoch'].values - 1
+
+senryu_idx = mapping[mapping['PoemType'] == 'S']['EEGLAB_Epoch'].values - 1
+
+control_idx = mapping[mapping['PoemType'] == 'C']['EEGLAB_Epoch'].values - 1
+
+epochs_haiku = epochs[haiku_idx]
+
+epochs_senryu = epochs[senryu_idx]
+
+epochs_control = epochs[control_idx]
+
+}
+
+  1. mapping = pd.read_excel('EEGLAB_Epoch_to_PoemType.xlsx')
+
+     * Reads the mapping Excel file generated from Block_1~7.xlsx using pandas.
+    
+  2. mapping = mapping.dropna(subset=['PoemType'])
+
+     * dropna() → Removes rows containing NaN (missing values).
+
+     * subset=['PoemType'] → Drops rows specifically where the PoemType column is empty (which filters out practice trials like Epochs 1 and 2).
+    
+  3. haiku_idx = mapping[mapping['PoemType'] == 'H']['EEGLAB_Epoch'].values - 1
+
+     * mapping[mapping['PoemType'] == 'H'] → Selects rows where PoemType is 'H'
+
+     * ['EEGLAB_Epoch'] → Extracts only the EEGLAB_Epoch column
+
+     * .values → Converts the pandas Series to a NumPy array
+
+     * -1 → Converts 1-based indexing to 0-based indexing
+
+      WHY?
+
+       EEGLAB_Epoch:  1,  2,  3,  4, ... 212   ← 1-based (EEGLAB convention)
+
+       Python index:  0,  1,  2,  3, ... 211   ← 0-based (Python convention)
+_______________________________________________
+
+
+
+
+  4. 
+
+
+
+
