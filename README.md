@@ -557,16 +557,59 @@ epochs_control = epochs[control_idx]
 
       WHY?
 
-       EEGLAB_Epoch:  1,  2,  3,  4, ... 212   ← 1-based (EEGLAB convention)
+       EEGLAB_Epoch:  1,  2,  3,  4, ... 212   ← 1-based (EEGLAB convention) -1 
+                     -1  -1   -1  -1      -1
+       ______________________________________
 
        Python index:  0,  1,  2,  3, ... 211   ← 0-based (Python convention)
-_______________________________________________
 
 
+  4. epochs_haiku = epochs[haiku_idx]
+
+     epochs_senryu = epochs[senryu_idx]
+
+     epochs_control = epochs[control_idx]
 
 
-  4. 
+    * epochs[indices] → Filters the MNE Epochs object to include only the specified indices.
+
+    * Result: Creates 3 distinct Epochs objects containing approximately 70 trials each.
+
+# ERP Data Extraction
+
+{
+
+pz_idx = epochs_haiku.ch_names.index('Pz')
+
+haiku_erp = epochs_haiku.average().data[pz_idx] * 1e6
+senryu_erp = epochs_senryu.average().data[pz_idx] * 1e6
+control_erp = epochs_control.average().data[pz_idx] * 1e6
+
+times = epochs_haiku.times * 1000
+}
 
 
+  1. pz_idx = epochs_haiku.ch_names.index('Pz')
 
+     * ch_names → List of channel names (['Fp1', 'AF7', ..., 'Pz', ...])
 
+     * .index('Pz') → Finds the numerical index corresponding to channel 'Pz'
+    
+       EX) if Pz is 31st, {Pz = 31}
+    
+  2-4. haiku_erp = epochs_haiku.average().data[pz_idx] * 1e6 / senryu_erp = epochs_senryu.average().data[pz_idx] * 1e6 / 
+control_erp = epochs_control.average().data[pz_idx] * 1e6
+
+     * epochs_haiku.average() → Computes the mean across all epochs (creates an Evoked object)
+     * .data → Extracts the underlying 2D NumPy array (channels * time points)
+     * [pz_idx] → Selects only the row corresponding to the Pz channel
+     * $\text{* 1e6}$ → Converts voltage units from {V- Volt} to mu{V} - microvolt (FYI, 1e6 = 1,000,000)
+        * Reason to convert volts into microvolts: Raw EEG signals are small floating-point values in volts (e.g., 0.000003 V = 3 muV).
+    
+  5. times = epochs_haiku.times * 1000
+
+     * epochs_haiku.times → Time array in seconds (-4.0s to 11.0s)
+     * $\text* 1000$ → Converts seconds to milliseconds (ms) for standard plotting conventions
+        * Reason to convert: Standard ERP latency reporting uses milliseconds.
+    
+  
