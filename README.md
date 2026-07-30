@@ -613,3 +613,62 @@ control_erp = epochs_control.average().data[pz_idx] * 1e6
         * Reason to convert: Standard ERP latency reporting uses milliseconds.
     
   
+# Plotting the ERP Comparison Graph
+
+{
+
+fig, ax = plt.subplots(figsize=(14, 5))
+
+ax.plot(times, haiku_erp, color='blue', label='Haiku', linewidth=1.5)
+
+ax.plot(times, senryu_erp, color='red', label='Senryu', linewidth=1.5)
+
+ax.plot(times, control_erp, color='green', label='Control', linewidth=1.5)
+
+ax.axvline(x=0, color='black', linestyle='--', linewidth=1)
+
+ax.axhline(y=0, color='gray', linestyle='-', linewidth=0.5)
+
+ax.set_xlim(-500, 3000)
+
+ax.set_ylim(-5, 5)
+
+ax.set_xlabel('Time (ms)')
+
+ax.set_ylabel('Amplitude (µV)')
+
+ax.set_title('ERP Comparison at Pz: Haiku vs Senryu vs Control')
+
+ax.legend()
+
+plt.tight_layout()
+
+plt.savefig('/content/drive/MyDrive/EEG_Study/ERP_Pz_comparison.png', dpi=150)
+
+plt.show()
+
+}
+
+  1. fig, ax = plt.subplots(figsize=(14, 5))
+
+     * plt.subplots() → Creates the figure container (fig) and axis area (ax)
+     * fig → The outer figure wrapper
+     * ax → The actual plot canvas
+     * figsize=(14, 5) → Specifies dimensions (14 inches wide x 5 inches tall)
+    
+  2-4. ax.plot(times, haiku_erp, color='blue', label='Haiku', linewidth=1.5) / ax.plot(times, senryu_erp, color='red', label='Senryu', linewidth=1.5) / ax.plot(times, control_erp, color='green', label='Control', linewidth=1.5)
+
+    * ax.plot() → Plots a line graph
+    * times → x-axis values (Time in ms)
+    * haiku_erp → y-axis values (Amplitude in muV)
+    * color='blue' → Line color
+    * label='Haiku' → Label entry for the legend
+    * linewidth=1.5 → Stroke thickness
+
+  5. ax.axvline(x=0, color='black', linestyle='--', linewidth=1)
+
+     * axvline → Vertical reference line (ax + vertical + line)
+     * x=0 → Positioned at 0 ms (stimulus onset)
+     * linestyle='--' → Dashed style
+    
+
