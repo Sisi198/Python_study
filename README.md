@@ -705,4 +705,92 @@ plt.show()
 
       * Displays plot in the notebook output
      
+# Preprocessing Automation Function
+
+## Function Declaration
+
+{
+
+def preprocess_subject(subject_id):
+    print(f"\n{'='*50}")
+    print(f"Processing sub-{subject_id}...")
+    print(f"{'='*50}")
+
+}
+
+1. def preprocess_subject(subject_id):
+   
+  * def → Python keyword meaning "I am defining a function"
+  * preprocess_subject → Function name (meaning preprocessing function)
+  * subject_id → Input value (e.g., subject numbers like '001', '002', etc.)
+
+2. print(f"\n{'='*50}")
+   
+   print(f"Processing sub-{subject_id}...")
+   
+   print(f"{'='*50}")
+
+  * This is used to visually track which subject is currently being processed when running through all 18 subjects!
+  * When executed, it looks like this:
+
+      ==================================================
+      Processing sub-001...
+      ==================================================
+
+3.
+
+import os
+
+os.system(f'aws s3 sync --no-sign-request s3://openneuro.org/ds006648/sub-{subject_id} /content/ds006648/sub-{subject_id}')
+
+  * os → Library containing operating system-related functions
+  * os.system() → Runs terminal commands directly from within Python
+  * f'aws s3 sync ... sub-{subject_id}' → Automatically updates the path based on subject_id:
+    * If subject_id='002'→ Downloads sub-002
+    * If subject_id='003'→ Downloads sub-003
+   
+4. 
+set_file = f'/content/ds006648/sub-{subject_id}/eeg/sub-{subject_id}_task-readpoetry_eeg.set'
+
+if not os.path.exists(set_file):
+
+    print(f"sub-{subject_id}: .set file not found, skipping!")
+    
+    return None
+
+  * os.path.exists() → to check if this file is in this path
+  * if not → If the file does not exist,
+    * return None → Stops the function right here and returns None (moves on to the next subject)
+
+  * Why this is important:
+    * Even if a download fails for a specific subject:
+      * the entire script will not halt due to an error→ it simply skips that subject and moves on to the next one
+
+### The remaining sections (preprocessing, ICA, epoching, and saving) are identical to the previous codes
+
+{
+
+import gc
+
+subjects = ['001', '002', '003', ... '018']
+
+for sub in subjects:
+
+    epochs = preprocess_subject(sub) 
+    
+    del epochs  
+    
+    gc.collect()  
+
+}
+
+  * for sub in subjects → Iterates through all 18 subjects in order
+  
+  * preprocess_subject(sub) → Calls the function (passing '001', '002', etc. into sub)
+  
+  * del epochs → Deletes the processed data from RAM
+  
+  * gc.collect() → Garbage collector = clears unreferenced memory
+
+
 
