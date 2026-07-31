@@ -670,5 +670,39 @@ plt.show()
      * axvline → Vertical reference line (ax + vertical + line)
      * x=0 → Positioned at 0 ms (stimulus onset)
      * linestyle='--' → Dashed style
+       
+  6. ax.axhline(y=0, color='gray', linestyle='-', linewidth=0.5)
+
+     * axhline → Horizontal reference line (ax + horizontal + line)
+     * y=0 → Positioned at 0 muV (zero-voltage baseline)
     
+  7-8. ax.set_xlim(-500, 3000) / ax.set_ylim(-5, 5)
+
+    * set_xlim → Displays time window from -500 ms to 3000 ms
+    * set_ylim → Sets amplitude scale from -5 muV to +5 muV
+
+  9-11. ax.set_xlabel('Time (ms)') / ax.set_ylabel('Amplitude (µV)') / ax.set_title('ERP Comparison at Pz: Haiku vs Senryu vs Control')
+
+    * ax.set_xlabel : display x axis in Time
+    * ax.set_ylabel : display y axis in Amplitude
+    * ax.set_title : display title in 'ERP Comparison at Pz: Haiku vs Senryu vs Control'
+
+  12. ax.legend()
+
+      * Renders the legend using designated labels (Haiku=blue, Senryu=red, Control=green)
+     
+  13. plt.tight_layout()
+
+      * Adjusts margins to avoid label overlap
+     
+  14. plt.savefig('/content/drive/MyDrive/EEG_Study/ERP_Pz_comparison.png', dpi=150)
+
+      * plt.savefig() → Exports plot image to Google Drive at 150 DPI resolution
+      * Path: The EEG_Study folder in Google Drive
+      * dpi=150 → Resolution (higher values result in clearer images, but larger file sizes)
+
+  15. plt.show()
+
+      * Displays plot in the notebook output
+     
 
