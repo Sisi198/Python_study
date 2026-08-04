@@ -501,3 +501,80 @@ is_correct is True. is_timeout is False, but adding not flips it, making not is_
 <img width="1212" height="492" alt="Screenshot 2026-08-04 at 4 05 37 pm" src="https://github.com/user-attachments/assets/cbdb27ea-057b-4e1f-ac7c-b8c95eec6ce3" />
 
 
+# Accumulating Values Inside a Loop (Accumulator Pattern)
+
+total_rt = 0
+
+for trial in range(5):
+
+    rt = 0.5          # (In a real experiment, this value would vary, but we'll use a fixed value for practice)
+    
+    total_rt = total_rt + rt
+    
+    print(f"After trial {trial + 1}, total_rt = {total_rt}")
+
+* Key point: "=" does not mean "equals"; it means "store the value on the right into the box on the left."
+* Which means: Take the current value inside the total_rt box, add rt to it, and overwrite the total_rt box with that new result.
+
+* Creating the box before starting the loop using total_rt = 0 is essential—without it, the first iteration will throw an error stating there is no target to add to.
+
+### Scenario: Accumulate response times across 4 trials, then calculate the total and average at the end.
+
+      Initialise the total_rt box to 0.
+      
+      Repeat 4 times using a for loop, setting rt = 0.4 each time and continually adding rt to accumulate into total_rt.
+      
+      After the loop ends (outside the indentation!), print total_rt.
+      
+      Below that, calculate the average (mean_rt) by dividing total_rt by 4, and print it formatted to 3 decimal places using an f-string.
+
+<img width="1226" height="710" alt="Screenshot 2026-08-04 at 5 14 11 pm" src="https://github.com/user-attachments/assets/411985d7-3b00-4cae-b1f9-e6306b1e330b" />
+
+
+Q. What happens if we omit total_rt = 0 and run the loop directly?
+
+<img width="1152" height="216" alt="Screenshot 2026-08-04 at 5 16 44 pm" src="https://github.com/user-attachments/assets/b9f3f3e9-c549-4ca2-af92-69d5e8c65072" />
+
+### Why Does This Error Occur?
+
+* When Python executes the line total_rt = total_rt + rt, it evaluates the right-hand side first.
+* That means to calculate total_rt + rt, a value must already exist inside the total_rt box at that exact moment.
+* However, on the very first iteration (the first trial), no one has created the box named total_rt yet—Python is trying to reference a box that simply does not exist.
+
+<img width="1438" height="712" alt="Screenshot 2026-08-04 at 5 19 02 pm" src="https://github.com/user-attachments/assets/a2437fa3-213e-4271-9fd4-bc42ab4b56c8" />
+
+# while Loop — Repeat while a condition is true
+
+* A for loop is used when "the number of repetitions is known in advance," whereas a while loop is used when "repeating as long as a condition remains true."
+* It is useful when the number of iterations isn't known ahead of time: for instance, letting a participant keep trying until they give a correct response.
+
+Code EX:
+
+      attempts = 0
+
+      while attempts < 3:
+          print(f"Attempt {attempts + 1}")
+          attempts = attempts + 1
+
+
+Output: 
+      Attempt 1
+      Attempt 2
+      Attempt 3
+
+* Breaking down the structure:
+
+   1. The loop continues as long as attempts < 3 evaluates to True.
+   2. Inside the loop, attempts = attempts + 1 increments the value each time, until attempts reaches 3, making the condition (3 < 3) False and terminating the loop.
+
+* Key point: if you forget to write {attempts = attempts + 1}, attempts remains 0 forever, and the condition will never become False. This traps the execution in an infinite loop, causing the program to hang
+
+### Scenario: A participant can attempt up to 3 practice trials.
+
+   * In each attempt, print "Practice attempt 1", "Practice attempt 2", etc., and stop once the 3rd attempt finishes.
+   * Initialise the attempts box to 0.
+   * Use a while loop to iterate while attempts is less than 3.In each iteration, print f"Practice attempt {?}" (formatted so it starts from 1).
+
+<img width="1122" height="530" alt="Screenshot 2026-08-04 at 5 28 04 pm" src="https://github.com/user-attachments/assets/16a5b082-5365-481c-b6c3-f6c70de90a9c" />
+
+
