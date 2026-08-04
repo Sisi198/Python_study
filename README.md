@@ -466,7 +466,38 @@ is_correct is True. is_timeout is False, but adding not flips it, making not is_
       
       If the condition is True, print "Valid trial: correct and fast". If it is False, print "Invalid trial".
 
-![Uploading Screenshot 2026-07-12 at 3.41.23 pm.png…]()
+<img width="1154" height="458" alt="Screenshot 2026-08-04 at 3 59 56 pm" src="https://github.com/user-attachments/assets/06548114-5ae5-48b4-9496-66f6929b29dc" />
 
+# for Loop : Repeat a set number of times
+
+<img width="1184" height="502" alt="Screenshot 2026-08-04 at 4 03 16 pm" src="https://github.com/user-attachments/assets/9be15ba8-a250-4cc8-aaf1-ed3e29210352" />
+
+* With each iteration, a new value (0 $\rightarrow$ 1 $\rightarrow$ 2 $\rightarrow$ 3 $\rightarrow$ 4) is placed into the trial box in sequence. 
+
+### Scenario: Display a welcome message in sequence to 3 participants. Create a for loop using range().
+
+   Repeating 3 times
+   print f"Welcome, participant {number}" each time
+
+   <img width="1216" height="390" alt="Screenshot 2026-08-04 at 4 08 52 pm" src="https://github.com/user-attachments/assets/072c1bfd-032e-426c-8ef7-5ecbcbb36923" />
+
+
+
+## How to set participant number start from 1:
+
+* Method 1 — Directly specifying the starting point in range():
+
+      for trial in range(1, 4):
+          print(trial)
+
+
+* Method 2 — Adjusting via calculation inside the loop:
+
+<img width="1210" height="250" alt="Screenshot 2026-08-04 at 4 08 37 pm" src="https://github.com/user-attachments/assets/35f9af50-5304-49ee-b3bc-982a8d56131f" />
+
+
+### Scenario: Display a welcome message in sequence from "Participant 1", "Participant 2" ... up to "Participant 5" for 5 participants. 
+
+<img width="1212" height="492" alt="Screenshot 2026-08-04 at 4 05 37 pm" src="https://github.com/user-attachments/assets/cbdb27ea-057b-4e1f-ac7c-b8c95eec6ce3" />
 
 
