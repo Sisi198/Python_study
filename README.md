@@ -5,9 +5,9 @@ A variable is a labeled box that holds a value. If you measure a participant's r
 reaction_time = 0.452
 
 reaction_time
-   ┌─────────────┐
+  
    │    0.452    │
-   └─────────────┘
+
    (box name)    (value inside the box)
 
 ## The most important thing: = does NOT mean "equals"
