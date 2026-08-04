@@ -578,3 +578,103 @@ Output:
 <img width="1122" height="530" alt="Screenshot 2026-08-04 at 5 28 04 pm" src="https://github.com/user-attachments/assets/16a5b082-5365-481c-b6c3-f6c70de90a9c" />
 
 
+# List : "Storing Multiple Values in a Single Box in Order"
+
+* In experiments, more frequently need to handle multiple values as a single set, like "the response times of 5 participants."
+* In those cases, instead of creating 5 separate variables (rt1, rt2, rt3...), store them all inside a single list.
+
+Code EX:
+
+rt_list = [0.45, 0.52, 0.61, 0.38, 0.70]
+
+* Enclose the items in square brackets [ ] and separate the values with commas ,. Inside the single box named rt_list, 5 values are stored in order.
+
+## Indexing — Extracting a Value at a Specific Position
+
+Each value inside a list has a position number (index), starting from 0. 
+
+Code EX:
+
+      rt_list = [0.45, 0.52, 0.61, 0.38, 0.70]
+      #            0     1     2     3     4    ← Index
+      
+      print(rt_list[0])    # 0.45  (1st value)
+      print(rt_list[2])    # 0.61  (3rd value)
+      print(rt_list[-1])   # 0.70  (Last value, negative index counts from the back)
+
+
+! tip. [-1] is used especially often because it conveniently retrieves the "very last value" without needing to know the length of the list.
+
+## List Length — len()
+
+* Counts how many items are stored inside the list.
+
+Code EX:
+
+  print(len(rt_list)) 
+
+
+
+### Scenario: Store the accuracy scores of 5 participants in a list.
+
+      Create a list named accuracy_list containing 0.85, 0.72, 0.91, 0.68, and 0.79 in order.
+      
+      Print the first participant's accuracy using indexing.
+      
+      Print the last participant's accuracy using [-1].
+      
+      Print the total number of participants using len().
+
+<img width="1242" height="182" alt="Screenshot 2026-08-04 at 6 33 09 pm" src="https://github.com/user-attachments/assets/8152eedf-ab90-4d94-9377-314ddd9ec191" />
+
+
+# Combining Lists and Loops
+
+* Up until now, we've extracted values by specifying each index manually ([0], [-1]).
+* But what if you want to iterate through every single value inside a list? If there were 500 participants instead of 5, writing [0] through [499] individually would be impossible. This is where loops step in.
+
+Code EX: 
+
+      accuracy_list = [0.85, 0.72, 0.91, 0.68, 0.79]
+      
+      for acc in accuracy_list:
+      
+          print(acc)
+
+
+* An important distinction to note: while this looks similar to {for trial in range(5):} it is doing something entirely different.
+* {for trial in range(5):} $\rightarrow$ trial sequentially stores the numbers 0, 1, 2, 3, 4.
+* {for acc in accuracy_list:} $\rightarrow$ acc sequentially stores the actual data values stored inside the list.
+
+# List + Loop + Accumulation
+
+Code EX:
+
+      accuracy_list = [0.85, 0.72, 0.91, 0.68, 0.79]
+      
+      total_accuracy = 0
+      
+      for acc in accuracy_list:
+      
+          total_accuracy = total_accuracy + acc
+      
+      mean_accuracy = total_accuracy / len(accuracy_list)
+      
+      print(f"Mean accuracy: {mean_accuracy:.3f}")
+      
+  <img width="1194" height="260" alt="Screenshot 2026-08-04 at 6 50 54 pm" src="https://github.com/user-attachments/assets/36928bf6-cc82-4388-9996-ab512944cd1b" />
+
+### Scenario: You have a list of response times collected from 6 trials. Calculate the overall mean response time.
+
+      rt_list = [0.42, 0.55, 0.38, 0.61, 0.47, 0.50]
+
+      1. Iterate through rt_list using a for loop, printing each value via print().
+      
+      (First verify that the values print correctly, without accumulating yet.)
+      
+      2. Initialise total_rt to 0, iterate through the list again using a for loop, and accumulate the values into total_rt.
+      
+      3. Calculate mean_rt using len(rt_list), and print it formatted to 3 decimal places using an f-string.
+
+<img width="1212" height="700" alt="Screenshot 2026-08-04 at 6 51 20 pm" src="https://github.com/user-attachments/assets/ee148adb-f906-4087-bcae-638175a1e048" />
+
