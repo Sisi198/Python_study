@@ -678,5 +678,84 @@ Code EX:
 
 <img width="1212" height="700" alt="Screenshot 2026-08-04 at 6 51 20 pm" src="https://github.com/user-attachments/assets/ee148adb-f906-4087-bcae-638175a1e048" />
 
+# Dictionary 
+
+  * Enclose the items in curly braces { }, writing each item in the format "Label": Value (key: value, key-value pairs).
+  * Items like "id" and "name" are the keys, and the following items like 205 and "Jay" are the values.
+
+  Code EX:
+  
+  participant = {
+      "id": 205,
+      "name": "Jay",
+      "accuracy": 0.87,
+      "group": "experimental"
+  }
+
+## Extracting Values — Using Keys Instead of Indices
+
+  * Whereas lists required specifying positions like [0] and [1], dictionaries allow specifying the key directly, like ["name"] and ["accuracy"].
+  
+  Code EX: 
+  
+  print(participant["name"])      
+  print(participant["accuracy"])  
+
+
+<img width="1182" height="292" alt="Screenshot 2026-08-08 at 4 09 02 pm" src="https://github.com/user-attachments/assets/7c02991b-31fd-49c5-8f0b-c6fb3405ddaa" />
+  
+  * List vs. Dictionary
+    * rt_list = [0.42, 0.55, 0.38] $\rightarrow$ Multiple values of the same type $\rightarrow$ List
+    * participant = {"id": 205, "rt": 0.42} $\rightarrow$ Grouping different attributes of one entity together $\rightarrow$ Dictionary
+   
+   
+### Scenario: Organise an experimental data entry for one participant using a dictionary.
+
+      Create a dictionary named trial_data containing the following key-value pairs:
+      
+      "trial_number": 3
+      
+      "condition": "congruent"
+      
+      "rt": 0.512
+      
+      "correct": True
+      
+      Print the value associated with the "condition" key.
+      
+      Print the value associated with the "rt" key.
+     
+  <img width="1206" height="342" alt="Screenshot 2026-08-08 at 4 09 54 pm" src="https://github.com/user-attachments/assets/f6458143-0d6a-4db4-b7ab-74dca065ad8b" />
+
+
+# Combining Dictionaries and Loops
+
+Code EX: 
+
+  trial_data = {
+      "trial_number": 3,
+      "condition": "congruent",
+      "rt": 0.512,
+      "correct": True
+  }
+  
+  for key in trial_data:
+      print(key)
+
+* Simply writing for key in trial_data: retrieves only the keys one by one. If you want to see the values alongside the keys, use .items():
+
+Code EX: 
+
+  for key, value in trial_data.items():
+      print(f"{key}: {value}")
+
+<img width="1232" height="400" alt="Screenshot 2026-08-08 at 4 24 32 pm" src="https://github.com/user-attachments/assets/d9b433d4-a33f-448c-8ec7-161cc3503292" />
+    
+
+### Scenario: Print every item in the trial_data dictionary you just created line by line in the format "Key: Value".
+  
+  Use trial_data, .items(), and a for loop to print each item line by line, like "trial_number: 3".
+  
+<img width="1200" height="236" alt="Screenshot 2026-08-08 at 4 24 41 pm" src="https://github.com/user-attachments/assets/a459d138-0924-4130-bfb2-9c76f6aa04a8" />
 
 
