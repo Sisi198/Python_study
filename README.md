@@ -872,15 +872,37 @@ for sub in subjects:
 
 }
 
-  * for sub in subjects → Iterates through all 18 subjects in order
+  1. for sub in subjects → Iterates through all 18 subjects in order
   
-  * preprocess_subject(sub) → Calls the function (passing '001', '002', etc. into sub)
+  2. preprocess_subject(sub) → Calls the function (passing '001', '002', etc. into sub)
   
-  * del epochs → Deletes the processed data from RAM
+  3.  del epochs → Deletes the processed data from RAM
   
-  * gc.collect() → Garbage collector = clears unreferenced memory
+  4. gc.collect() → Garbage collector (gc) = clears unreferenced memory
 
 <img width="1166" height="692" alt="Screenshot 2026-08-11 at 5 00 35 pm" src="https://github.com/user-attachments/assets/b85dea0d-014f-4249-8130-48b59a0c70a2" />
 
 
 
+# Saving into Google Drive ( for easier coding, since I was using Google Colab during analysis)
+
+{
+
+save_path = '/content/drive/MyDrive/EEG_Study/'
+
+    os.makedirs(save_path, exist_ok=True)
+    
+    epochs.save(save_path + f'sub-{subject_id}-epo.fif', overwrite=True)
+    
+    print(f"sub-{subject_id}: Saved!")
+
+    return epochs
+
+print("Function defined!")
+
+}
+
+
+  1. save_path = '/content/drive/MyDrive/EEG_Study/' →
+
+  2. 
