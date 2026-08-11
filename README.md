@@ -1,4 +1,3 @@
-# EEG data Python code study
 
 {
 
@@ -45,6 +44,10 @@ from mne.preprocessing import ICA
       MNE stands for Magnetoencephalography and Electroencephalography.
       
       : It was originally a Python library built for analysing MEG (magnetoencephalography) and EEG (electroencephalography) data.
+
+
+<img width="2616" height="668" alt="Screenshot 2026-08-11 at 4 17 53 pm" src="https://github.com/user-attachments/assets/4bbc703b-7524-4caf-a75c-df1dd2fbaba2" />
+
 
 ## Data download
 
@@ -115,6 +118,10 @@ from mne.preprocessing import ICA
 
     →  Copy the sub-001 data on the OpenNeuro server into the Colab environment.
 
+
+<img width="1838" height="366" alt="Screenshot 2026-08-11 at 4 18 25 pm" src="https://github.com/user-attachments/assets/46c978b2-262d-496c-9759-ecf92754b066" />
+
+
 ## Data Loading
 
 
@@ -124,6 +131,10 @@ raw = mne.io.read_raw_eeglab(
     '/content/ds006648/sub-001/eeg/sub-001_task-readpoetry_eeg.set',
     preload=False
 )
+
+print(f"Duration: {raw.times[-1]:.1f} seconds")
+print(f"Channels: {len(raw.ch_names)}")
+print("Data loaded!")
 
 }
 
@@ -141,6 +152,35 @@ raw = mne.io.read_raw_eeglab(
 
 
       * The data is loaded into memory later when raw.load_data() is called. This allows you to configure preprocessing steps first and load the data only when needed.
+
+
+    5. print(f"Duration: {raw.times[-1]:.1f} seconds") → 
+    
+      5-1/ raw.times is an array of timestamps per sample starting from 0 seconds. 
+      5-2/ [-1] uses Python's negative indexing to denote last value of the array, which directly corresponds to the time point when recording ended: total recording duration.
+      
+      * Since the recording starts at 0 seconds, no separate subtraction is needed.
+  
+      5-3/ :.1f - A format specifier that neatly rounds and prints that value to one decimal place.
+
+    6. print(f"Channels: {len(raw.ch_names)}") → The length of the channel names list = how many EEG (and other) channels exist in this recording.
+
+    
+Code Output EX:
+
+{
+
+Reading /content/ds006648/sub-001/eeg/sub-001_task-readpoetry_eeg.set
+
+Duration: 6422.0 seconds
+
+Channels: 70
+
+Data loaded!
+
+}
+
+<img width="2644" height="694" alt="Screenshot 2026-08-11 at 4 19 37 pm" src="https://github.com/user-attachments/assets/2357ab04-281a-4a13-83d2-55c795c5a3ce" />
 
 
 # remove EXG channel
@@ -319,6 +359,12 @@ Common types of references:
 ! The reference is chosen by the researcher when designing the experiment. However, in the analysis phase, converting to Average Reference is the standard approach for high-density EEG (64+ channels)
 
 
+<img width="1764" height="700" alt="Screenshot 2026-08-11 at 4 38 08 pm" src="https://github.com/user-attachments/assets/70e27944-e387-4589-a769-3c4d15495f43" />
+
+<img width="1878" height="798" alt="Screenshot 2026-08-11 at 4 38 19 pm" src="https://github.com/user-attachments/assets/d50d3e10-a6ee-40f3-9fbe-1edfab09c03f" /># EEG data Python code study
+
+
+
 # ICA
 
 
@@ -365,6 +411,11 @@ ica.fit(raw_short, verbose=False)
     * ica.fit() → Starts the actual ICA fitting/training!
     
     * raw_short → Fits using the 3000-second cropped dataset
+  
+
+<img width="2596" height="540" alt="Screenshot 2026-08-11 at 4 39 18 pm" src="https://github.com/user-attachments/assets/0fe07c73-19a1-4947-a9a0-2c6c7bb46ef2" />
+
+
   
 ## Code For ICA in Actual Research Settings (Sufficient RAM)
 
@@ -434,6 +485,9 @@ ica.apply(raw)
     * ica.apply(raw) → Applies the ICA component subtraction across the entire dataset (the full 6,422-second dataset, not just the 3,000-second subset)
 
 
+<img width="1458" height="452" alt="Screenshot 2026-08-11 at 4 49 54 pm" src="https://github.com/user-attachments/assets/ef4f2d65-5014-471a-885b-05179fd85432" />
+
+
 # epoching 
 
 {
@@ -477,6 +531,10 @@ epochs = mne.Epochs(
         * Subtracts the mean amplitude calculated across the -4.0 s to 0 s pre-stimulus interval from the entire trial segment. Zero-centring the pre-stimulus signal isolates post-stimulus evoked dynamics.
       * preload=True
         * Unlike raw continuous recordings, segmented epoch arrays (e.g., 212 trials * 15 seconds) have a substantially lower memory footprint and can safely be loaded directly into RAM.
+
+
+<img width="1440" height="290" alt="Screenshot 2026-08-11 at 4 51 36 pm" src="https://github.com/user-attachments/assets/a934a26b-91f5-4f90-8fbf-04b9f041e9f0" />
+
        
 ____
 
@@ -511,6 +569,8 @@ ica.apply(raw)
 epochs = mne.Epochs(raw, events, tmin=-4.0, tmax=11.0, baseline=(-4.0, 0))
 
 _____
+
+
 
 # Condition Separation + ERP Visualisation
 
@@ -575,6 +635,10 @@ epochs_control = epochs[control_idx]
 
     * Result: Creates 3 distinct Epochs objects containing approximately 70 trials each.
 
+
+<img width="1452" height="962" alt="Screenshot 2026-08-11 at 4 56 38 pm" src="https://github.com/user-attachments/assets/422714a5-75da-48e0-a8fc-fa7a91aa75c7" />
+
+
 # ERP Data Extraction
 
 {
@@ -582,10 +646,13 @@ epochs_control = epochs[control_idx]
 pz_idx = epochs_haiku.ch_names.index('Pz')
 
 haiku_erp = epochs_haiku.average().data[pz_idx] * 1e6
+
 senryu_erp = epochs_senryu.average().data[pz_idx] * 1e6
+
 control_erp = epochs_control.average().data[pz_idx] * 1e6
 
 times = epochs_haiku.times * 1000
+
 }
 
 
@@ -611,7 +678,14 @@ control_erp = epochs_control.average().data[pz_idx] * 1e6
      * epochs_haiku.times → Time array in seconds (-4.0s to 11.0s)
      * $\text* 1000$ → Converts seconds to milliseconds (ms) for standard plotting conventions
         * Reason to convert: Standard ERP latency reporting uses milliseconds.
-    
+
+
+<img width="1442" height="568" alt="Screenshot 2026-08-11 at 4 57 17 pm" src="https://github.com/user-attachments/assets/f26978be-7bc2-4c26-a6b7-9c67ba660cce" />
+
+
+
+
+
   
 # Plotting the ERP Comparison Graph
 
@@ -705,6 +779,10 @@ plt.show()
 
       * Displays plot in the notebook output
      
+<img width="1438" height="692" alt="Screenshot 2026-08-11 at 4 57 44 pm" src="https://github.com/user-attachments/assets/9b452df1-118f-4fe0-8404-a643111f615a" />
+
+
+     
 # Preprocessing Automation Function
 
 ## Function Declaration
@@ -712,8 +790,11 @@ plt.show()
 {
 
 def preprocess_subject(subject_id):
+
     print(f"\n{'='*50}")
+    
     print(f"Processing sub-{subject_id}...")
+    
     print(f"{'='*50}")
 
 }
@@ -733,9 +814,11 @@ def preprocess_subject(subject_id):
   * This is used to visually track which subject is currently being processed when running through all 18 subjects!
   * When executed, it looks like this:
 
-      ==================================================
-      Processing sub-001...
-      ==================================================
+    **  ==================================================
+
+    Processing sub-001...
+
+     ==================================================**
 
 3.
 
@@ -765,6 +848,11 @@ if not os.path.exists(set_file):
   * Why this is important:
     * Even if a download fails for a specific subject:
       * the entire script will not halt due to an error→ it simply skips that subject and moves on to the next one
+     
+<img width="972" height="218" alt="Screenshot 2026-08-11 at 4 59 48 pm" src="https://github.com/user-attachments/assets/46c9aa6b-5dd0-4930-8d19-4e507f454dab" />
+
+
+
 
 ### The remaining sections (preprocessing, ICA, epoching, and saving) are identical to the previous codes
 
@@ -792,6 +880,7 @@ for sub in subjects:
   
   * gc.collect() → Garbage collector = clears unreferenced memory
 
+<img width="1166" height="692" alt="Screenshot 2026-08-11 at 5 00 35 pm" src="https://github.com/user-attachments/assets/b85dea0d-014f-4249-8130-48b59a0c70a2" />
 
 
 
